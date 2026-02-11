@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProTracker | Interactive Bullet Journal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="aurora aurora-1"></div>
+  <div class="aurora aurora-2"></div>
+
+  <header class="top-bar glass">
+    <div>
+      <h1>ProTracker</h1>
+      <p class="subtitle">Your interactive bullet journal: life, goals, wellness & logs</p>
+    </div>
+    <div class="top-actions">
+      <button id="export-data" class="secondary">Export</button>
+      <label for="import-data" class="secondary import-label">Import</label>
+      <input id="import-data" type="file" accept="application/json" />
+      <button id="reset-data" class="danger">Reset</button>
+    </div>
+  </header>
+
+  <nav class="quick-nav glass" aria-label="Section Navigation">
+    <a href="#daily">Daily</a>
+    <a href="#routines">Routines</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#goals-projects">Goals & Projects</a>
+    <a href="#planner">Planner</a>
+    <a href="#media">Media Logs</a>
+    <a href="#calendar-section">Calendar</a>
+    <a href="#notes-section">Notes</a>
+    <a href="#analytics-section">Analytics</a>
+  </nav>
+
+  <main class="dashboard">
+    <section id="daily" class="card wide">
+      <h2>Daily To-Do + Priorities</h2>
+      <div class="input-row">
+        <input id="todo-input" placeholder="Add task / reminder" maxlength="120" />
+        <select id="todo-priority">
+          <option value="high">High</option>
+          <option value="medium" selected>Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <button id="add-todo">Add</button>
+      </div>
+      <div id="todo-list" class="list"></div>
+      <p class="muted" id="todo-stats"></p>
+    </section>
+
+    <section id="routines" class="card wide">
+      <h2>Routine Trackers (Every N days)</h2>
+      <div class="input-row">
+        <select id="routine-type">
+          <option value="habit">Habit</option>
+          <option value="skincare">Skin care</option>
+          <option value="hair">Hair wash</option>
+          <option value="clothes">Cloth washing</option>
+        </select>
+        <input id="routine-name" placeholder="Routine name" maxlength="80" />
+        <input id="routine-frequency" type="number" min="1" max="30" value="1" />
+        <button id="add-routine">Add Tracker</button>
+      </div>
+      <div id="routine-list" class="list"></div>
+    </section>
+
+    <section id="wellness" class="card">
+      <h2>Sleep Tracker</h2>
+      <div class="input-row compact">
+        <input id="sleep-hours" type="number" min="0" max="24" step="0.5" placeholder="Hours slept" />
+        <input id="sleep-quality" type="number" min="1" max="10" placeholder="Quality /10" />
+        <button id="save-sleep">Save</button>
+      </div>
+      <div id="sleep-list" class="list"></div>
+    </section>
+
+    <section class="card">
+      <h2>Mood + Anxiety Tracker</h2>
+      <div class="input-row compact">
+        <select id="mood">
+          <option value="great">😀 Great</option>
+          <option value="good">🙂 Good</option>
+          <option value="okay">😐 Okay</option>
+          <option value="low">🙁 Low</option>
+        </select>
+        <input id="anxiety" type="number" min="1" max="10" placeholder="Anxiety /10" />
+        <button id="save-mood">Save</button>
+      </div>
+      <div id="mood-list" class="list"></div>
+    </section>
+
+    <section id="goals-projects" class="card">
+      <h2>Goals</h2>
+      <div class="input-row">
+        <input id="goal-input" placeholder="Add goal" maxlength="120" />
+        <input id="goal-deadline" type="date" />
+        <button id="add-goal">Add</button>
+      </div>
+      <div id="goal-list" class="list"></div>
+    </section>
+
+    <section class="card">
+      <h2>Projects</h2>
+      <div class="input-row">
+        <input id="project-input" placeholder="Add project" maxlength="120" />
+        <button id="add-project">Add</button>
+      </div>
+      <div id="project-list" class="list"></div>
+    </section>
+
+    <section id="planner" class="card">
+      <h2>Monthly / Weekly / Yearly Planner</h2>
+      <div class="planner-tabs">
+        <button class="tab active" data-plan="monthly">Monthly</button>
+        <button class="tab" data-plan="weekly">Weekly</button>
+        <button class="tab" data-plan="yearly">Yearly</button>
+      </div>
+      <div class="input-row">
+        <input id="planner-input" placeholder="Add plan item" maxlength="140" />
+        <button id="add-plan-item">Add</button>
+      </div>
+      <div id="planner-list" class="list"></div>
+    </section>
+
+    <section id="media" class="card">
+      <h2>Media Logs + Star Ratings</h2>
+      <div class="input-row">
+        <select id="media-type">
+          <option value="book">Book</option>
+          <option value="audiobook">Audio book</option>
+          <option value="movie">Movie</option>
+          <option value="song">Song</option>
+        </select>
+        <input id="media-title" placeholder="Title" maxlength="120" />
+        <input id="media-rating" type="number" min="1" max="5" placeholder="1-5 stars" />
+        <button id="add-media">Add</button>
+      </div>
+      <p class="muted">Auto-sorted by rating (highest first)</p>
+      <div id="media-list" class="list"></div>
+    </section>
+
+    <section id="calendar-section" class="card wide">
+      <h2>Calendar Overview</h2>
+      <div class="month-header">
+        <button id="prev-month" class="secondary">◀</button>
+        <strong id="month-label"></strong>
+        <button id="next-month" class="secondary">▶</button>
+      </div>
+      <div id="calendar" class="calendar"></div>
+    </section>
+
+    <section id="notes-section" class="card wide">
+      <h2>Notes / Reflections</h2>
+      <textarea id="notes" placeholder="Daily reflections, gratitude, highlights, thoughts..."></textarea>
+      <p class="muted" id="notes-status">Autosaved</p>
+    </section>
+
+    <section id="analytics-section" class="card">
+      <h2>Progress Snapshot</h2>
+      <ul id="analytics"></ul>
+    </section>
+  </main>
+
+  <template id="item-template">
+    <div class="list-item glass">
+      <div class="content"></div>
+      <div class="actions"></div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
