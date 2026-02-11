@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProTracker | Bullet Productivity</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div>
+      <h1>ProTracker</h1>
+      <p class="subtitle">A bullet-journal inspired productivity dashboard</p>
+    </div>
+    <div class="top-actions">
+      <button id="export-data" class="secondary">Export Data</button>
+      <label for="import-data" class="secondary import-label">Import Data</label>
+      <input id="import-data" type="file" accept="application/json" />
+      <button id="reset-data" class="danger">Reset</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <section class="card daily-log">
+      <h2>Daily Log</h2>
+      <div class="input-row">
+        <input id="task-input" placeholder="Add a task (e.g. Finish report)" maxlength="120" />
+        <select id="task-priority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+        <button id="add-task">Add</button>
+      </div>
+      <div id="task-list" class="list"></div>
+      <div class="card-footer">
+        <span id="task-stats">0/0 completed</span>
+      </div>
+    </section>
+
+    <section class="card habit-tracker">
+      <h2>Habit Tracker</h2>
+      <div class="input-row">
+        <input id="habit-input" placeholder="Add a habit (e.g. Meditate)" maxlength="80" />
+        <button id="add-habit">Add Habit</button>
+      </div>
+      <div id="habit-list" class="list"></div>
+    </section>
+
+    <section class="card goals">
+      <h2>Goals & Projects</h2>
+      <div class="input-row">
+        <input id="goal-input" placeholder="Add a goal / project" maxlength="120" />
+        <input id="goal-deadline" type="date" />
+        <button id="add-goal">Add Goal</button>
+      </div>
+      <div id="goal-list" class="list"></div>
+    </section>
+
+    <section class="card notes">
+      <h2>Notes</h2>
+      <textarea id="notes" placeholder="Capture ideas, reflections, meeting notes..."></textarea>
+      <div class="card-footer">
+        <span id="notes-status">Autosaved</span>
+      </div>
+    </section>
+
+    <section class="card monthly-overview">
+      <h2>Monthly Overview</h2>
+      <div class="month-header">
+        <button id="prev-month" class="secondary">◀</button>
+        <strong id="month-label"></strong>
+        <button id="next-month" class="secondary">▶</button>
+      </div>
+      <div id="calendar" class="calendar"></div>
+    </section>
+
+    <section class="card focus-timer">
+      <h2>Focus Timer (Pomodoro)</h2>
+      <div class="timer-display" id="timer-display">25:00</div>
+      <div class="timer-controls">
+        <button id="start-timer">Start</button>
+        <button id="pause-timer" class="secondary">Pause</button>
+        <button id="reset-timer" class="secondary">Reset</button>
+      </div>
+      <div class="input-row compact">
+        <label>
+          Focus (min)
+          <input id="focus-minutes" type="number" min="5" max="90" value="25" />
+        </label>
+        <label>
+          Break (min)
+          <input id="break-minutes" type="number" min="3" max="30" value="5" />
+        </label>
+      </div>
+      <p id="timer-phase">Ready for focus session</p>
+    </section>
+
+    <section class="card wellbeing">
+      <h2>Wellbeing</h2>
+      <div class="input-row compact">
+        <label for="mood">Mood</label>
+        <select id="mood">
+          <option value="great">😀 Great</option>
+          <option value="good">🙂 Good</option>
+          <option value="okay">😐 Okay</option>
+          <option value="low">🙁 Low</option>
+        </select>
+        <label for="energy">Energy</label>
+        <input id="energy" type="range" min="1" max="10" value="6" />
+      </div>
+      <textarea id="journal" placeholder="What helped today? What needs attention tomorrow?"></textarea>
+      <button id="save-wellbeing">Save Check-in</button>
+      <div id="checkin-history" class="list"></div>
+    </section>
+
+    <section class="card analytics">
+      <h2>Progress Snapshot</h2>
+      <ul id="analytics-list"></ul>
+    </section>
+  </main>
+
+  <template id="list-item-template">
+    <div class="list-item">
+      <div class="content"></div>
+      <div class="actions"></div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
